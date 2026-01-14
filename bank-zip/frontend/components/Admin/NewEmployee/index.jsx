@@ -4,7 +4,7 @@ const NewEmployee = () => {
     return(
         <Adminlayout>
             <h1 className="text-5xl font-bold text-pink-600">
-                WELCOME TO Admin DASHBOARD
+               NEW EMPLOYEE PAGE
             </h1>
         </Adminlayout>
     )
