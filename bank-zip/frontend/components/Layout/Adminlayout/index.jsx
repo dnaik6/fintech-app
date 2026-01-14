@@ -18,12 +18,12 @@ const Adminlayout = ({ children }) => {
         {
             key: '/admin',
             icon: <DashboardOutlined />,
-            label: <Link>Dashboard</Link>
+            label: <Link to ="/admin">Dashboard</Link>
         },
           {
             key: '/admin/new-employee',
             icon: <UserOutlined />,
-            label: <Link>New Employee</Link>
+            label: <Link to="/admin/new-employee">New Employee</Link>
         },
     ];
 
