@@ -1,3 +1,5 @@
+import Adminlayout from "../Layout/Adminlayout";
+
 const Dashboard = () => {
     return(
         <Adminlayout>
