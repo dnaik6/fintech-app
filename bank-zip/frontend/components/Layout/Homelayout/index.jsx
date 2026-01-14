@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,7 +8,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-const { Header, Sider, Content } = Layout;
+const{ Header, Sider, Content } = Layout;
 const Homelayout = ({children}) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -41,4 +42,5 @@ const Homelayout = ({children}) => {
       </Layout>
   );
 };
+
 export default Homelayout;
