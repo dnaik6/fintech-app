@@ -14,11 +14,19 @@ try{
 }
 
 catch(error){
-    res.status(500).json({
+    if(error.code === 11000){
+        return res.status(422).json({
+            message : "Email already exists",
+            success: false,   
+            error
+        })}
+
+    else{
+        res.status(500).json({
         message : "Internal Server Error",
         error
-    })
-
+            })
+        }
 }
 }
 module.exports = {

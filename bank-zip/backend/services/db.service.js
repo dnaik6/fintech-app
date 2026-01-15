@@ -1,5 +1,7 @@
 require("dotenv").config();
 const mongo = require("mongoose");
+
+const url = process.env.MONGO_URL;
 mongo.connect(url);
 
 const findAllRecord = async (schema) => {
@@ -7,7 +9,7 @@ const findAllRecord = async (schema) => {
     return dbRes;
 }
 
-const createNewRecord = async (DataTransfer, schema) => {
+const createNewRecord = async (data, schema) => {
     const dbRes= await new schema(data).save();
     return dbRes;
 }
