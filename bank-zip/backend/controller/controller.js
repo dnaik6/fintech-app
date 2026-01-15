@@ -1,9 +1,14 @@
-const createData = (req, res, Schema) => {
+const dbService = require('../services/db.service');
+
+
+const createData = async (req, res, Schema) => {
 try{
     const data = req.body;
+    const dbRes = await dbService.createNewRecord(data, Schema);
         res.status(200).json({
-        message : "Data recieved",
-        data
+        message : "Data inserted successfully",
+        success: true,
+        data: dbRes
     })
 
 }

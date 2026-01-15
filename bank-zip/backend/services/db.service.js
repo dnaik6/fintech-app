@@ -1,4 +1,4 @@
-requestAnimationFrame("dotenv").config();
+require("dotenv").config();
 const mongo = require("mongoose");
 mongo.connect(url);
 
