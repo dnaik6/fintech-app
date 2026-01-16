@@ -16,7 +16,7 @@ try{
 catch(error){
     if(error.code === 11000){
         return res.status(422).json({
-            message : "Email already exists",
+            message : "already exists",
             success: false,   
             error
         })}
