@@ -3,24 +3,22 @@ import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
 import swal from "sweetalert";
-import { useState } from "react";
-
-
+import {useState} from "react";
 
 const {Item} = Form;
 const NewEmployee = () => {
     // states collection
-    const[empForm] = Form.useForm();
-    const[loading, setLoading] = useState(false);
+    const [empForm] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
-
-    // creat enew employee
+    // create new employee
     const onFinish = async (values) => {
+
         try{
             setLoading(true);
             let finalObj= trimData(values);
             const httpReq = http();
-            const{data} = await httpReq.post(`/api/users`,finalObj);
+            const{data} = await httpReq.post("/api/users",finalObj);
             swal("success", "Employee Created Successfully", "success");
             empForm.resetFields();
         }
@@ -34,12 +32,29 @@ const NewEmployee = () => {
                 ]);
                     }
             else{
-                swal("Warning", "Something went wrong", "warning");
+                swal("Warning", "Try again later", "warning");
+        }
+        }finally{
+            setLoading(false);
         }
     }
-    finally{
-        setLoading(false);
-    }
+
+    //handles file upload
+    const handleUpload = async (e) => {
+       try{
+            let file = e.target.files[0];
+            const formData = new FormData();
+            formData.append("photo", file);
+            const httpReq = http();
+            const {data} = await httpReq.post("/api/upload", formData);
+            console.log(data);
+
+       }catch(err){
+            console.log("STATUS:", err?.response?.status);
+            console.log("DATA:", err?.response?.data);
+            console.log("MSG:", err?.message);
+            swal("Failed", "Image upload failed", "warning");
+       }
     }
 
     // Table Columns
@@ -119,7 +134,7 @@ const columns = [
                         label="Profile"
                         name="xyz"
                         >
-                            <Input type="file"/>
+                            <Input onChange = {handleUpload} type= "file"/>
                         </Item>
                         <div className="grid md:grid-cols-2 gap-x-2">
                                                     
@@ -163,7 +178,7 @@ const columns = [
                             loading={loading}
                             type="text"
                             htmlType="submit"
-                            className="!bg-pink-400 !text-white !font-bold !w-full">
+                            className="!bg-blue-400 !text-white !font-bold !w-full">
                             Submit
 
                             </Button>
