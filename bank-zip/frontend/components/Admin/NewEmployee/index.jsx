@@ -10,17 +10,19 @@ const NewEmployee = () => {
     // states collection
     const [empForm] = Form.useForm();
     const [loading, setLoading] = useState(false);
-
+    const [photo, setPhoto] = useState(null)
     // create new employee
     const onFinish = async (values) => {
 
         try{
             setLoading(true);
             let finalObj= trimData(values);
+            finalObj.profile = photo ? photo : "bankImages/WIFE.jpg";
             const httpReq = http();
             const{data} = await httpReq.post("/api/users",finalObj);
             swal("success", "Employee Created Successfully", "success");
             empForm.resetFields();
+            setPhoto(null);
         }
         catch(err){
             if(err?.response?.data?.error?.code ==11000){
@@ -47,7 +49,7 @@ const NewEmployee = () => {
             formData.append("photo", file);
             const httpReq = http();
             const {data} = await httpReq.post("/api/upload", formData);
-            console.log(data);
+            setPhoto(data.filePath);
 
        }catch(err){
             console.log("STATUS:", err?.response?.status);
