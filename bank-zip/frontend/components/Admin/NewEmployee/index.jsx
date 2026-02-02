@@ -191,7 +191,7 @@ const columns = [
                             loading={loading}
                             type="text"
                             htmlType="submit"
-                            className="!bg-blue-400 !text-white !font-bold !w-full">
+                            className="!bg-pink-400 !text-white !font-bold !w-full">
                             Submit
 
                             </Button>
