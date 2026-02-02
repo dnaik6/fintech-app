@@ -26,17 +26,17 @@ const sendEmail =  (req, res) => {
       <tr>
         <td align="center" valign="middle">
           
-          <table cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); font-family: Arial, sans-serif; margin: auto;">
+          <table cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 100%; background-color: #fcade7; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); font-family: Arial, sans-serif; margin: auto;">
             
             <tr>
               <td align="center" style="padding: 20px 0;">
-                <img src="https://www.justforcode.in/images/logo.jpg" alt="Company Logo" width="120" style="display: block;">
+                <img src="https://galaxypfp.com/wp-content/uploads/2025/11/pastel-bunny-avatar.jpg" alt="Company Logo" width="120" style="display: block;">
               </td>
             </tr>
             
             <tr>
               <td align="center" style="padding: 10px 0; background-color: rgb(215, 17, 182); color: #ffffff; font-size: 22px; font-weight: bold;">
-                JFC Corporative Bank
+                Diva Bank
               </td>
             </tr>
             
@@ -47,11 +47,11 @@ const sendEmail =  (req, res) => {
                   Here are your login credentials:
                 </p>
                 <table cellpadding="10" cellspacing="0" width="100%" style="margin-top: 10px; border: 1px solid #ddd;">
-                  <tr style="background-color: #f9f9f9;">
+                  <tr style="background-color: #e1a6d6;">
                     <td style="font-weight: bold; width: 30%;">Username:</td>
                     <td>${email}</td>
                   </tr>
-                  <tr style="background-color: #f9f9f9;">
+                  <tr style="background-color: #e8a6dd;">
                     <td style="font-weight: bold;">Password:</td>
                     <td>${password}</td>
                   </tr>
@@ -61,14 +61,14 @@ const sendEmail =  (req, res) => {
                 </p>
                 <p style="margin-top: 30px; font-size: 16px;">
                   Best regards,<br><br>
-                  <strong>Just For Code</strong>
+                  <strong>Diva Bank</strong>
                 </p>
               </td>
             </tr>
             
             <tr>
               <td align="center" style="padding: 15px; background-color: #f1f1f1; font-size: 12px; color: #666;">
-                &copy; 2025 JFC Corporative Bank . All rights reserved.
+                &copy; 2025 Diva Bank . All rights reserved.
               </td>
             </tr>
           </table>
@@ -77,7 +77,30 @@ const sendEmail =  (req, res) => {
     </table>
   </body>
 </html>`;
+
+
+const mailOption= {
+    from: process.env.ADMIN_EMAIL,
+    to: email,
+    subject: 'Your Diva Account Details!',
+    html: emailTemplate
 }
+transporter.sendMail(mailOption, (err, info) => {
+    if(err){
+        return res.status(500).json({
+            message : "Failed to send email",
+            emailSend: false,
+        })
+    } 
+    res.status(200).json({
+        message : "Email sent successfully",
+        emailSend: true,
+    })
+});
+
+
+}
+
 
 module.exports = {
     sendEmail
