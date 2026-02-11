@@ -12,6 +12,8 @@ const NewEmployee = () => {
     const [messageApi, context] = message.useMessage();
     const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState(null)
+    const [allEmployee, setAllEmployee] = useState([])
+
     //get app employee data
     useEffect(()=>{
 
@@ -19,7 +21,7 @@ const NewEmployee = () => {
             try{
                 const httpReq = http();
                 const {data} = await httpReq.get("/api/users");
-                console.log(data);
+                setAllEmployee(data.data);
             }
             catch(err){
                 messageApi.error("Failed to fetch employee data");
@@ -224,8 +226,8 @@ const columns = [
                 >
                    <Table
   columns={columns}
-  dataSource={[{}, {}]}
-  rowKey={(record, index) => index}
+  dataSource={allEmployee}
+  
 />
                 </Card>
             </div>
