@@ -101,7 +101,7 @@ const columns = [
     render: (src,obj) =>(
        
         <img
-          src={`${import.meta.env.VITE_BASEURL}/${src}`}
+          src={`${import.meta.env.VITE_BASEURL}/${obj.profile}`}
           alt="profile"
           className="w-10 h-10 rounded-full object-cover"
           width={40}
