@@ -1,6 +1,6 @@
 import { Button, Card, Form, Input, Table, message } from "antd";
 import Adminlayout from "../../Layout/Adminlayout";
-import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
 import swal from "sweetalert";
 import {useEffect, useState} from "react";
@@ -132,12 +132,13 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: () => (
+    fixed: "right",
+    render: (_, obj) => (
         <div className="flex gap-1">
             <Button
             type="text"
-            className="!bg-pink-100 !text-pink-500"
-            icon={<EyeInvisibleOutlined />}
+            className={`${obj.isActive ? "!bg-pink-400 !text-white" : "!bg-indigo-100 !text-white"} `}
+            icon={obj.isActive ? <EyeOutlined /> : <EyeInvisibleOutlined />}
             />
             <Button
             type="text"
@@ -223,10 +224,12 @@ const columns = [
                 <Card
                 className="md:col-span-2" 
                 title="List Employees"
+                style={{overflowX:"auto"}}
                 >
                    <Table
   columns={columns}
   dataSource={allEmployee}
+  scroll={{ x:"max-content" }}
   
 />
                 </Card>
