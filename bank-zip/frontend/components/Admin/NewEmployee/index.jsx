@@ -3,7 +3,7 @@ import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
 import swal from "sweetalert";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const {Item} = Form;
 const NewEmployee = () => {
@@ -12,6 +12,24 @@ const NewEmployee = () => {
     const [messageApi, context] = message.useMessage();
     const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState(null)
+    //get app employee data
+    useEffect(()=>{
+
+        const fetcher = async()=>{
+            try{
+                const httpReq = http();
+                const {data} = await httpReq.get("/api/users");
+                console.log(data);
+            }
+            catch(err){
+                messageApi.error("Failed to fetch employee data");
+            }
+        }
+
+        fetcher();
+
+    },[])
+
     // create new employee
     const onFinish = async (values) => {
 
