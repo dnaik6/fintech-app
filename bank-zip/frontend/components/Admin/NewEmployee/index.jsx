@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Table } from "antd";
+import { Button, Card, Form, Input, Table, message } from "antd";
 import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
@@ -9,6 +9,7 @@ const {Item} = Form;
 const NewEmployee = () => {
     // states collection
     const [empForm] = Form.useForm();
+    const [messageApi, context] = message.useMessage();
     const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState(null)
     // create new employee
@@ -30,7 +31,7 @@ const NewEmployee = () => {
             console.log(res);
             
 
-            swal("success", "Employee Created Successfully", "success");
+            messageApi.success( "Employee Created Successfully");
             empForm.resetFields();
             setPhoto(null);
 
@@ -45,7 +46,7 @@ const NewEmployee = () => {
                 ]);
                     }
             else{
-                swal("Warning", "Try again later", "warning");
+                messageApi.error("Try again later");
         }
         }finally{
             setLoading(false);
@@ -66,7 +67,7 @@ const NewEmployee = () => {
             console.log("STATUS:", err?.response?.status);
             console.log("DATA:", err?.response?.data);
             console.log("MSG:", err?.message);
-            swal("Failed", "Image upload failed", "warning");
+            messageApi.error("Image upload failed");
        }
     }
 
@@ -135,6 +136,7 @@ const columns = [
 ];
     return (
         <Adminlayout>
+            {context}
             <div className="grid md:grid-cols-3 gap-3">
                 <Card
                 title="New Employees"
