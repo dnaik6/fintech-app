@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Table, message } from "antd";
+import { Button, Card, Form, Input, Popconfirm, Table, message } from "antd";
 import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
@@ -73,6 +73,13 @@ const NewEmployee = () => {
         }
     }
 
+    // update is active status
+    const updateIsActive = async (id, isActive) => {
+        alert(id);
+        alert(isActive);
+        
+    }
+
     //handles file upload
     const handleUpload = async (e) => {
        try{
@@ -135,11 +142,18 @@ const columns = [
     fixed: "right",
     render: (_, obj) => (
         <div className="flex gap-1">
+            <Popconfirm
+            title ="Are you sure you wish to change status?"
+            description="If you change the status, you may also revert it back"
+            onCancel={()=>messageApi.info("Status change cancelled")}
+            onConfirm={()=>updateIsActive(obj._id, obj.isActive)}
+            >
             <Button
             type="text"
             className={`${obj.isActive ? "!bg-pink-400 !text-white" : "!bg-indigo-100 !text-white"} `}
             icon={obj.isActive ? <EyeOutlined /> : <EyeInvisibleOutlined />}
             />
+            </Popconfirm>
             <Button
             type="text"
             className="!bg-pink-100 !text-pink-500"
