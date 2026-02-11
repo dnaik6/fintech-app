@@ -75,9 +75,20 @@ const NewEmployee = () => {
 
     // update is active status
     const updateIsActive = async (id, isActive) => {
-        alert(id);
-        alert(isActive);
+        try{
+            const obj ={
+                isActive : !isActive
+            }
+            const httpReq = http();
+            const {data} = await httpReq.put(`/api/users/${id}`, obj);
+            messageApi.success("Status updated successfully");
+            }
+
         
+        catch(err){
+            messageApi.error("Failed to update status");
+        }
+
     }
 
     //handles file upload
