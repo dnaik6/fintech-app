@@ -98,16 +98,16 @@ const columns = [
     title: "Profile",
     dataIndex: "profile",
     key: "profile",
-    render: (profile) =>
-      profile ? (
+    render: (src,obj) =>(
+       
         <img
-          src={profile}
+          src={`${import.meta.env.VITE_BASEURL}/${src}`}
           alt="profile"
           className="w-10 h-10 rounded-full object-cover"
+          width={40}
+          height={40}
         />
-      ) : (
-        <span>No Image</span>
-      ),
+      )
   },
   {
     title: "Full Name",
