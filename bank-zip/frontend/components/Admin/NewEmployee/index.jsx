@@ -13,6 +13,7 @@ const NewEmployee = () => {
     const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState(null)
     const [allEmployee, setAllEmployee] = useState([])
+    const[no, setNo] = useState(0);
 
     //get app employee data
     useEffect(()=>{
@@ -30,7 +31,7 @@ const NewEmployee = () => {
 
         fetcher();
 
-    },[])
+    },[no])
 
     // create new employee
     const onFinish = async (values) => {
@@ -54,6 +55,7 @@ const NewEmployee = () => {
             messageApi.success( "Employee Created Successfully");
             empForm.resetFields();
             setPhoto(null);
+            setNo(no+1);
 
         }
         catch(err){
@@ -82,6 +84,7 @@ const NewEmployee = () => {
             const httpReq = http();
             const {data} = await httpReq.put(`/api/users/${id}`, obj);
             messageApi.success("Status updated successfully");
+            setNo(no+1);
             }
 
         
